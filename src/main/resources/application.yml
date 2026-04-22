@@ -1,0 +1,40 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: rag-project
+
+
+# OpenAI配置
+openai:
+  base-url: https://api.openai.com
+  api-key: ${DASH_SCOPE_API_KEY}
+  chat-model: glm-5
+  embedding-model: text-embedding-ada-002
+  timeout: 60s
+  temperature: 0.7
+  max-tokens: 1000
+
+
+# Milvus配置
+milvus:
+  host: ${MILVUS_HOST:localhost}
+  port: ${MILVUS_PORT:19530}
+  database: default
+  collection-name: documents
+  dimension: 1536
+
+# RAG配置
+rag:
+  rerank:
+    ratio: 3  # 重排序时初步检索的倍数
+
+# 日志配置
+logging:
+  level:
+    root: INFO
+    com.claude.rag: DEBUG
+    dev.langchain4j: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
